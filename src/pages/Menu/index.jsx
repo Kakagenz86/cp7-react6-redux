@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useEffect } from "react";
-import { TYPES } from "../../redux/Types";
+// import { TYPES } from "../../redux/Types";
+import { listMenu } from "../../redux/actions/menuAction";
 
 const Menu = () => {
     // const { List } = useSelector((state) => state.menuReducer);
@@ -12,22 +12,9 @@ const Menu = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        listMenu();
+        dispatch(listMenu());
     }, []);
-    const listMenu = async () => {
-        try {
-            const response = await axios.get("https://api.mudoapi.tech/menus");
-            console.log(response.data.data.Data);
-            dispatch({ 
-                type: TYPES.MENU_LIST, 
-                payload: {
-                    menuList: response.data.data.Data
-                }
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    
 
     return (
         <div>
